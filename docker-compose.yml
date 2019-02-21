@@ -8,10 +8,10 @@ services:
     ports:
       - '80:80' # The HTTP port
       - '443:443' # The HTTPS port
-      - '9000:8080' # The Web UI (enabled by --api)
+      - '10000:8080' # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - ./traefik/traefik.toml:/traefik.toml # Traefik configuration file
+      - ./traefik/traefik.toml:/etc/traefik/traefik.toml # Traefik configuration file
     networks:
       - traefik
 
@@ -24,13 +24,11 @@ services:
       - traefik
     labels:
       - 'traefik.enable=true'
-      - 'traefik.port=9001'
+      - 'traefik.port=9000'
       - 'traefik.docker.network=traefik'
       - 'traefik.backend=portainer'
       - 'traefik.frontend.rule=Host:portainer.localhost'
     command: --admin-password '$$2y$$05$$DGMeC8zwonBfw7MQshDuhux2lBxoC3ujYYQPEwBBm9R7jgXC35otu'
-    ports:
-      - 9001:9000
 
 networks:
   traefik:
