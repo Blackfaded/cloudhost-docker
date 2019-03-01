@@ -1,4 +1,5 @@
 defaultEntryPoints = ["http"]
+logLevel = "DEBUG"
 
 [entryPoints]
   [entryPoints.http]
