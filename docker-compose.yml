@@ -28,7 +28,7 @@ services:
       - 'traefik.docker.network=traefik'
       - 'traefik.backend=portainer'
       - 'traefik.frontend.rule=Host:cloudhost.hsrw.eu;PathPrefixStrip:/portainer'
-      - 'traefik.frontend.auth.forward.address=http://api.cloudhost.hsrw.eu/auth/portainer'
+      - 'traefik.frontend.auth.forward.address=http://cloudhost.hsrw.eu/api/auth/portainer'
     command: --no-auth
 
 networks:
