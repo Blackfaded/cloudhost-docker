@@ -18,7 +18,6 @@ services:
       - traefik
 
   portainer:
-    env_file: .env
     image: portainer/portainer
     extra_hosts:
      - '${FRONTEND_URL}:10.2.16.58'
