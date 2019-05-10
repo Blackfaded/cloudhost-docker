@@ -5,6 +5,8 @@ services:
     image: traefik:v1.7.8-alpine # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Traefik to listen to docker
     container_name: reverse-proxy
+    extra_hosts:
+     - 'staging.cloudhost.hsrw.eu:10.2.16.58'
     ports:
       - '80:80' # The HTTP port
       - '443:443' # The HTTPS port
