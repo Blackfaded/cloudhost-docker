@@ -2,8 +2,10 @@ version: '3.5'
 
 services:
   reverse-proxy:
-    build: . # The official Traefik docker image
+    image: traefik:v1.7.8-alpine # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    env_file:
+      - .env.staging
     container_name: reverse-proxy
     extra_hosts:
      - '${FRONTEND_URL}:10.2.16.58'
@@ -13,12 +15,17 @@ services:
       - '10000:8080' # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - ./traefik/traefik.toml:/etc/traefik/traefik.toml # Traefik configuration file
+      - ./traefik/traefik.staging.toml:/etc/traefik/traefik.toml # Traefik configuration file      
+      - ./certs/cert.pem:/cert.pem
+      - ./certs/key.unencrypted.pem:/privkey.pem
+
     networks:
       - traefik
 
   portainer:
     image: portainer/portainer
+    env_file:
+      - .env.staging
     extra_hosts:
      - '${FRONTEND_URL}:10.2.16.58'
     volumes:
