@@ -4,11 +4,7 @@ services:
   reverse-proxy:
     image: traefik:v1.7.8-alpine # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Traefik to listen to docker
-    env_file:
-      - .env.staging
     container_name: reverse-proxy
-    extra_hosts:
-     - '${FRONTEND_URL}:10.2.16.58'
     ports:
       - '80:80' # The HTTP port
       - '443:443' # The HTTPS port
@@ -24,10 +20,8 @@ services:
 
   portainer:
     image: portainer/portainer
-    env_file:
-      - .env.staging
     extra_hosts:
-     - '${FRONTEND_URL}:10.2.16.58'
+     - 'staging.cloudhost.hsrw.eu:10.2.16.58'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - 'portainerdata:/data'
@@ -38,8 +32,8 @@ services:
       - 'traefik.port=9000'
       - 'traefik.docker.network=traefik'
       - 'traefik.backend=portainer'
-      - "traefik.frontend.rule=Host:${FRONTEND_URL};PathPrefixStrip:/portainer"
-      - 'traefik.frontend.auth.forward.address=${PROTOKOL}://${BACKEND_URL}/auth/portainer'
+      - "traefik.frontend.rule=Host:staging.cloudhost.hsrw.eu;PathPrefixStrip:/portainer"
+      - 'traefik.frontend.auth.forward.address=https://staging.cloudhost.hsrw.eu/api/auth/portainer'
     command: --no-auth
 
 networks:

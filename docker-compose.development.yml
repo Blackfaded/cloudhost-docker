@@ -5,10 +5,6 @@ services:
     image: traefik:v1.7.8-alpine # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Traefik to listen to docker
     container_name: reverse-proxy
-    env_file:
-      - .env.development
-    extra_hosts:
-      - '${FRONTEND_URL}:10.2.16.58'
     ports:
       - '80:80' # The HTTP port
       - '443:443' # The HTTPS port
@@ -35,8 +31,8 @@ services:
       - 'traefik.port=9000'
       - 'traefik.docker.network=traefik'
       - 'traefik.backend=portainer'
-      - 'traefik.frontend.rule=Host:${FRONTEND_URL};PathPrefixStrip:/portainer'
-      - 'traefik.frontend.auth.forward.address=${PROTOKOL}://${BACKEND_URL}/auth/portainer'
+      - 'traefik.frontend.rule=Host:cloudhost.localhost;PathPrefixStrip:/portainer'
+      - 'traefik.frontend.auth.forward.address=http://cloudhost.localhost/api/auth/portainer'
     command: --no-auth
 
 networks:
