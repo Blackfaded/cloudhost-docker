@@ -10,8 +10,12 @@ logLevel = "DEBUG"
   address = ":443"
   [entryPoints.https.tls]
     [[entryPoints.https.tls.certificates]]
-    certFile = "/cert.pem"
-    keyFile = "/privkey.pem"
+    certFile = "/cloudhost.hsrw.eu.cert"
+    keyFile = "/cloudhost.hsrw.eu.key"
+  [[entryPoints.https.tls.certificates]]
+    certFile = "/git.hsrw.eu.cert"
+    keyFile = "/git.hsrw.eu.key"
+
 
 [docker]
 # domain = "docker.localhost"

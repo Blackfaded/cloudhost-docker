@@ -12,10 +12,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./traefik/traefik.production.toml:/etc/traefik/traefik.toml # Traefik configuration file      
-      - ./certs/cert.pem:/cloudhost.hsrw.eu.cert
-      - ./certs/privkey.pem:/cloudhost.hsrw.eu.key
-      - /etc/letsencrypt/live/git.hsrw.eu/fullchain.pem:/git.hsrw.eu.cert
-      - /etc/letsencrypt/live/git.hsrw.eu/privkey.pem:/git.hsrw.eu.key
+      - ./certs/cert.pem:/cert.pem
+      - ./certs/privkey.pem:/privkey.pem
+      - /etc/nginx/ssl/git.hsrw.eu/chain.pem:/git.hsrw.eu.chain.pem   - /etc/nginx/ssl/git.hsrw.eu/chain.pem:/git.hsrw.eu.chain.pem
 
     networks:
       - traefik
