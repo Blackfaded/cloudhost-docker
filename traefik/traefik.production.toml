@@ -12,9 +12,6 @@ logLevel = "DEBUG"
     [[entryPoints.https.tls.certificates]]
     certFile = "/cloudhost.hsrw.eu.cert"
     keyFile = "/cloudhost.hsrw.eu.key"
-  [[entryPoints.https.tls.certificates]]
-    certFile = "/git.hsrw.eu.cert"
-    keyFile = "/git.hsrw.eu.key"
 
 
 [docker]

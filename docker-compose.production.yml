@@ -14,8 +14,6 @@ services:
       - ./traefik/traefik.production.toml:/etc/traefik/traefik.toml # Traefik configuration file      
       - ./certs/cert.pem:/cloudhost.hsrw.eu.cert
       - ./certs/privkey.pem:/cloudhost.hsrw.eu.key
-      - /etc/letsencrypt/live/git.hsrw.eu/fullchain.pem:/git.hsrw.eu.cert
-      - /etc/letsencrypt/live/git.hsrw.eu/privkey.pem:/git.hsrw.eu.key
 
     networks:
       - traefik
